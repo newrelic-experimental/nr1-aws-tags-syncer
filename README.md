@@ -25,7 +25,7 @@ AWS tags syncer application has three main sections:
 
 * **Details:** a list of cards. Each card has the host (name, account and tags), and below, the applications running in the host (name and tags). The server icon is clickable and can open the host entity overview, the application icon is clickable and can open the service overview page. You may have one or multiple apps running in an EC2 instance (there are 2 in the example below).
 
-<img src="screenshots/details.png">
+<img src="screenshots/details.png" width="200">
 
 In Addition to the main sections, there are few other options:
 
