@@ -1,0 +1,6 @@
+{
+    "schemaType": "NERDLET",
+    "id": "sync-tags-nerdlet",
+    "description": "An application to import AWS EC2 tags to New Relic",
+    "displayName": "Sync AWS Tags "
+}
