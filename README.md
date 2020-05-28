@@ -25,13 +25,13 @@ AWS tags syncer application has three main sections:
 
 * **Details:** a list of cards. Each card has the host (name, account and tags), and below, the applications running in the host (name and tags). The server icon is clickable and can open the host entity overview, the application icon is clickable and can open the service overview page. You may have one or multiple apps running in an EC2 instance (there are 2 in the example below).
 
-![](screenshots/details.png)
+<img src="screenshots/details.png">
 
 In Addition to the main sections, there are few other options:
 
 * **Actions:** a list of actions are available: Select all apps, Deselect all apps,  Sync application tags (selected ones) and show help. You can either select all apps (after filtering if needed) or you can manually select each app by clicking in the little box in the application section in each card. Then you can click on "sync you applications tags" to import AWS tags to your APM services.
 
-![](screenshots/actions.png)
+<img src="screenshots/actions.png" width="300">
 
 * **Help:** details the rules this application is using to sync the tags.
 
@@ -63,7 +63,7 @@ Visit [https://one.newrelic.com/?nerdpacks=local](https://one.newrelic.com/?nerd
 
 When installed you should see this launcher in NR1 welcome page:
 
-![](screenshots/launcher.png)
+<img src="screenshots/launcher.png" width="250">
 
 ## Deploying this Nerdpack
 
