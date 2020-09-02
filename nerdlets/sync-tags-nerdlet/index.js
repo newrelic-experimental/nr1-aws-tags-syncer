@@ -131,7 +131,6 @@ export default class SyncTags extends React.Component {
     };
 
     onAppSelect = (hostIndex,appIndex,e) => {
-        console.log(e);
         if(e.target.checked) {
             const entities = this.state.presentationData;
             const selectedApps = this.state.selectedApps;
@@ -142,8 +141,7 @@ export default class SyncTags extends React.Component {
             selectedApps.push({appGuid: app.guid, appTags: app.tags, hostTags: host.tags});
             host.apmApps.splice(appIndex,1,app);
             entities.details.splice(hostIndex,1,host);
-            this.setState({presentationData:entities, selectedApps}, () => console.log(selectedApps));
-            console.log("checked");
+            this.setState({presentationData:entities, selectedApps});
 
         } else {
             const entities = this.state.presentationData;
@@ -152,11 +150,9 @@ export default class SyncTags extends React.Component {
             const app = host.apmApps[appIndex];
             app.checked = false;
             const selectedApps = this.state.selectedApps.filter(sel => sel.appGuid !== app.guid);
-            console.log(selectedApps);
             host.apmApps.splice(appIndex,1,app);
             entities.details.splice(hostIndex,1,host);
-            this.setState({presentationData:entities, selectedApps}, () => console.log(this.state.selectedApps));
-            console.log("unchecked");
+            this.setState({presentationData:entities, selectedApps});
         }
     }
 
@@ -164,8 +160,6 @@ export default class SyncTags extends React.Component {
         const data = this.state.hosts;
         const filters = this.state.filters;
         filters[props.name] = props.value || props.checked;
-        console.log(filters);
-        console.log(props);
         const filteredData = filterData(data, filters);
         updateAllCheckedFlags(filteredData, false);
         this.setState({presentationData:filteredData, filters, selectedApps:[]});
@@ -187,10 +181,10 @@ export default class SyncTags extends React.Component {
             let allApps = entities.details.map(host => host.apmApps.map(app => ({appGuid: app.guid, appTags: app.tags, hostTags: host.tags}))).flat();
             // Update flags for checkbox
             updateAllCheckedFlags(entities, true);
-            this.setState({selectedApps: allApps, presentationData:entities}, () => {console.log(this.state.selectedApps);console.log(this.state.presentationData)});
+            this.setState({selectedApps: allApps, presentationData:entities});
         } else if(props.value === 'deselectAll') {
             updateAllCheckedFlags(entities, false);
-            this.setState({selectedApps: [], presentationData:entities},() => {console.log(this.state.selectedApps);console.log(this.state.presentationData)});
+            this.setState({selectedApps: [], presentationData:entities});
         } else if(props.value === 'help') {
             this.setState({showHelpMsg:true});
         }
@@ -217,8 +211,8 @@ export default class SyncTags extends React.Component {
         this.setState({showSyncMsg: false, isUpdating: true});  
         tagsMutate(this.state.selectedApps).then(results => {
             results.forEach(result => {
-                if (typeof result === 'string' && result.startsWith('ERROR')) {
-                    console.log(result);
+                if ((typeof result === 'string' && result.startsWith('ERROR')) || (result.data.taggingAddTagsToEntity.errors.length > 0)) {
+                    console.error(result);
                     Toast.showToast({
                         title: 'Errors detected',
                         description: 'Please check your browser console!!',
@@ -241,8 +235,6 @@ export default class SyncTags extends React.Component {
 
     render() {
         const {loadError, loadingState, hosts, isUpdating, presentationData, accountId, accounts} = this.state;
-        console.log(hosts)
-        console.log(this.state.accounts)
         if (loadingState) {
             return (
                 <Loader active size='large'>Checking your data, this might take a while...</Loader>

@@ -67,7 +67,7 @@ export default class ModalMsg extends React.Component {
                 >
                     <Header icon='sync' content='Confirmation:' />
                     <Modal.Content>
-                    <h3>You are about to update the tags of <strong>{this.props.nbApps}</strong> service(s). Would you like to continue?</h3>
+                    <p>You are about to update the tags of <strong>{this.props.nbApps}</strong> service(s). Would you like to continue?</p>
                     </Modal.Content>
                     <Modal.Actions>
                     <Button.Group>
